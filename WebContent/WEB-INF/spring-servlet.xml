@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="model" />
+	<bean id="collaboration" class="model.Collaboration" />
+	<bean id="offer" class="model.Offer" />
+	<bean id="request" class="model.Request" />
+	<bean id="skill" class="model.Skill" />
+	<bean id="student" class="model.Student" />
+
+    <context:component-scan base-package="dao" />
+    <bean id="studentDao" class="dao.StudentDao" />
+    <bean id="skillDao" class="dao.SkillDao" />
+    <bean id="requestDao" class="dao.RequestDao" />
+    <bean id="offerDao" class="dao.OfferDao" />
+    <bean id="collaborationDao" class="dao.CollaborationDao" />
+
+	<context:component-scan base-package="domain" />
+	<bean id="userDetails" class="domain.UserDetails" />
+	<bean id="login" class="domain.Login" />
+		
+    <context:component-scan base-package="controller"/>
+    <bean id="studentController" class="controller.StudentController" />
+    <bean id="skillController" class="controller.SkillController" />
+    <bean id="offerController" class="controller.OfferController" />
+    <bean id="requestController" class="controller.RequestController" />
+    <bean id="collaborationController" class="controller.CollaborationController" />
+    <bean id="loginController" class="controller.LoginController" />
+
+	
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- Font de dades -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- Fitxer de propietats JDBC, localitzacio relativa al classpath -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+</beans>
